@@ -1,0 +1,91 @@
+﻿@page "/details/employee/{id:int}"
+@using DemoProj.Shared.Models
+@inject NavigationManager NavManager
+@inject HttpClient Http
+@inject IEmployeeService EmployeeService
+
+<h3>Details of Employee (Id : @id)</h3>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Fname</th>
+        <th>Lname</th>
+        <th>dept_Id</th>
+        <th>address_Id</th>
+        <th>actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @if (isEditing)
+    {
+        <tr>
+            <td> - </td>
+            <td>
+                <input @bind="employee.Fname"/>
+            </td>
+            <td>
+                <input @bind="employee.Lname"/>
+            </td>
+            <td>
+                <input @bind="employee.DeptId"/>
+            </td>
+            <td>
+                <input @bind="employee.AddressId"/>
+            </td>
+            <td>
+                <button @onclick="() => edit(employee)">done</button>
+            </td>
+        </tr>
+    }
+    else
+    {
+        <tr>
+            <td>@employee.Id</td>
+            <td>@employee.Fname</td>
+            <td>@employee.Lname</td>
+            <td>
+                <a href="details/department/@employee.DeptId">@employee.DeptId</a>
+            </td>
+            <td>
+                <a href="details/address/@employee.AddressId">@employee.AddressId</a>
+            </td>
+            <td><button @onclick="() => isEditing = !isEditing">edit</button> | <button @onclick="() => delete(employee.Id)">delete</button></td>
+        </tr>
+    }
+
+    </tbody>
+</table>
+
+@code {
+
+    [Parameter]
+    public int id { get; set; }
+
+    public bool isEditing { get; set; }
+
+    public Employee employee = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var temp = await Http.GetFromJsonAsync<Employee>($"employee/{id}");
+        if (temp != null)
+        {
+            employee = temp;
+        }
+    }
+
+    protected async Task delete(int id)
+    {
+        await Http.DeleteAsync($"employee/{id}");
+        NavManager.NavigateTo("/allemployees");
+    }
+
+    protected async Task edit(Employee e)
+    {
+        await Http.PutAsJsonAsync($"employee/{id}", employee);
+        isEditing = !isEditing;
+    }
+
+}

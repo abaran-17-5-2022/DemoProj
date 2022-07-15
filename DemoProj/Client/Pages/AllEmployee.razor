@@ -1,0 +1,120 @@
+﻿@page "/allemployees"
+@using DemoProj.Shared.Models
+@inject HttpClient Http
+@inject IEmployeeService EmployeeService
+
+<PageTitle>Employee Details</PageTitle>
+
+<h1>Employee Details</h1>
+
+<input type="text" @oninput="Search" placeholder="Search"/>
+
+@if (employees == null)
+{
+    <p>
+        <em>Loading...</em>
+    </p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Fname</th>
+            <th>Lname</th>
+            <th>dept_Id</th>
+            <th>address_Id</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var employee in employees)
+        {
+            <tr>
+                <td>@employee.Id</td>
+                <td>@employee.Fname</td>
+                <td>@employee.Lname</td>
+                @if (employee.Id != 0)
+                {
+                    <td>
+                        <a href="details/department/@employee.DeptId">@employee.DeptId</a>
+                    </td>
+                }
+                else
+                {
+                    <td> - </td>
+                }
+                @if (employee.Id != 0)
+                {
+                    <td>
+                        <a href="details/address/@employee.AddressId">@employee.AddressId</a>
+                    </td>
+                }
+                else
+                {
+                    <td> - </td>
+                }
+                @if (employee.Id != 0)
+                {
+                    <td><a href="details/employee/@employee.Id">Details</a> | <button @onclick="() => Delete(employee.Id)">Delete</button></td>
+                }
+                else
+                {
+                    <td> - </td>
+                }
+            </tr>
+        }
+        <tr>
+            <td> - </td>
+            <td>
+                <input type="text" @bind="_employee.Fname"/>
+            </td>
+            <td>
+                <input type="text" @bind="_employee.Lname"/>
+            </td>
+            <td>
+                <input type="number" @bind="_employee.DeptId"/>
+            </td>
+            <td>
+                <input type="number" @bind="_employee.AddressId"/>
+            </td>
+            <td>
+                <button @onclick="Add">Add</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+}
+
+@code {
+    private Employee _employee = new ();
+
+    private List<Employee>? employees;
+
+    protected override async Task OnInitializedAsync()
+    {
+        employees = await EmployeeService.GetEmployees();
+    }
+
+    private async Task Search(ChangeEventArgs args)
+    {
+        var search = args.Value == null ? "" : (string)args.Value;
+
+        employees = await EmployeeService.GetEmployeeByName(search);
+    }
+
+    private async Task Add()
+    {
+        var tempId = employees!.MaxBy(e => e.Id)!.Id + 1;
+        await EmployeeService.AddEmployee(tempId, _employee);
+        _employee = new();
+        employees = await EmployeeService.GetEmployees();
+    }
+
+    private async Task Delete(int id)
+    {
+        await EmployeeService.DeleteEmployee(id);
+        employees = await EmployeeService.GetEmployees();
+    }
+}

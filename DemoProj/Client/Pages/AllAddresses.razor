@@ -1,0 +1,102 @@
+﻿@page "/alladdresses"
+@using DemoProj.Shared.Models
+@inject HttpClient Http
+
+<PageTitle>Address Details</PageTitle>
+
+<h1>Address Details</h1>
+
+<input type="text" @bind="search" placeholder="Search"/>
+<button @onclick="Search">Search</button>
+
+@if (addresses == null)
+{
+    <p>
+        <em>Loading...</em>
+    </p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Address</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var add in addresses)
+        {
+            <tr>
+                <td>@add.id</td>
+                <td>@add.address</td>
+                <td><a href="details/address/@add.id">details</a> | <button @onclick="() => delete(add.id)">delete</button></td>
+            </tr>
+        }
+        <tr>
+            <td>-</td>
+            <td>
+                <input type="text" @bind="address"/>
+            </td>
+            <td>
+                <button @onclick="Add">Add</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+}
+
+@code {
+    public int id { get; set; }
+    public string address { get; set; } = "";
+
+
+    private List<Address> addresses = new();
+
+    public string search { get; set; } = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetAll();
+    }
+
+    protected async Task GetAll()
+    {
+        var temp = await Http.GetFromJsonAsync<List<Address>>("address");
+        if (temp != null)
+        {
+            addresses = temp;
+        }
+    }
+
+    protected async Task Search()
+    {
+        var temp = await Http.GetFromJsonAsync<List<Address>>($"address/{search}");
+        if (temp != null)
+        {
+            addresses = temp;
+        }
+    }
+
+    protected async Task Add()
+    {
+        var tempId = addresses.MaxBy(a => a.id).id + 1;
+
+        var temp = new Address
+        {
+            id = tempId,
+            address = address
+        };
+        await Http.PutAsJsonAsync("address", temp);
+        await GetAll();
+        address = "";
+    }
+
+    protected async Task delete(int id)
+    {
+        await Http.DeleteAsync($"address/{id}");
+        await GetAll();
+    }
+
+}

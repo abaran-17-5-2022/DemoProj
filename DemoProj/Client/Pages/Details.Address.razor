@@ -1,0 +1,83 @@
+﻿@page "/details/address/{id:int}"
+@using DemoProj.Shared.Models
+@inject NavigationManager NavManager
+@inject HttpClient Http
+
+<h3>Details of Address (Id : @id)</h3>
+
+@if (address != null)
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>address</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @if (isEditing)
+        {
+            <tr>
+                <td> - </td>
+                <td>
+                    <input @bind="@address.address"/>
+                </td>
+                <td>
+                    <button @onclick="edit">done</button>
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td>@address.id</td>
+                <td>@address.address</td>
+                <td><button @onclick="() => isEditing = !isEditing">edit</button> | <button @onclick="delete">delete</button></td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <br/>
+    <p>This ID does not exist</p>
+}
+
+@code {
+
+    [Parameter]
+    public int id { get; set; }
+
+    public bool isEditing { get; set; }
+
+    public Address? address;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Get();
+    }
+
+    protected async Task Get()
+    {
+        var temp = await Http.GetFromJsonAsync<Address>($"address/{id}");
+        if (temp != null)
+        {
+            address = temp;
+        }
+    }
+
+    protected async Task delete()
+    {
+        await Http.DeleteAsync($"address/{id}");
+        NavManager.NavigateTo("address/");
+    }
+
+    protected async Task edit()
+    {
+        await Http.PutAsJsonAsync<Address>($"address/{id}", address);
+        isEditing = !isEditing;
+    }
+
+}

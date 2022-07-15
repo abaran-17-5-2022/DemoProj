@@ -1,0 +1,70 @@
+﻿@page "/details/department/{id:int}"
+@using DemoProj.Shared.Models
+@inject NavigationManager NavManager
+@inject HttpClient Http
+
+<h3>Details of Department (Id : @id)</h3>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>name</th>
+        <th>actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @if (isEditing)
+    {
+        <tr>
+            <td> - </td>
+            <td>
+                <input @bind="@department.name"/>
+            </td>
+            <td>
+                <button @onclick="edit">done</button>
+            </td>
+        </tr>
+    }
+    else
+    {
+        <tr>
+            <td>@department.id</td>
+            <td>@department.name</td>
+            <td><button @onclick="() => isEditing = !isEditing">edit</button> | <button @onclick="delete">delete</button></td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@code {
+
+    [Parameter]
+    public int id { get; set; }
+
+    public bool isEditing { get; set; }
+
+    public Department department = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var temp = await Http.GetFromJsonAsync<Department>($"department/{id}");
+        if (temp != null)
+        {
+            department = temp;
+        }
+    }
+
+    protected async Task delete()
+    {
+        await Http.DeleteAsync($"department/{id}");
+        NavManager.NavigateTo("department/");
+    }
+
+    protected async Task edit()
+    {
+        await Http.PutAsJsonAsync($"department/{id}", department);
+        isEditing = !isEditing;
+    }
+
+}

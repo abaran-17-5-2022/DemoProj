@@ -1,0 +1,93 @@
+﻿@page "/alldepartments"
+@using DemoProj.Shared.Models
+@inject HttpClient Http
+@inject IDepartmentService DepartmentService
+
+<PageTitle>Department Details</PageTitle>
+
+<h1>Department Details</h1>
+
+<input type="text" @bind="search" placeholder="Search"/>
+<button @onclick="Search">Search</button>
+
+@if (departments == null)
+{
+    <p>
+        <em>Loading...</em>
+    </p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>name</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var department in departments)
+        {
+            <tr>
+                <td>@department.id</td>
+                <td>@department.name</td>
+                <td><a href="details/department/@department.id">details</a> | <button @onclick="() => delete(department.id)">delete</button></td>
+            </tr>
+        }
+        <tr>
+            <td>-</td>
+            <td>
+                <input type="text" @bind="_department.name"/>
+            </td>
+            <td>
+                <button @onclick="Add">Add</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+}
+
+@code {
+    private Department _department = new ();
+
+
+    private List<Department>? departments;
+
+    public string search { get; set; } = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        departments = await DepartmentService.GetDepartments();
+    }
+
+    protected async Task GetAll()
+    {
+        departments = await DepartmentService.GetDepartments();
+    }
+
+    protected async Task Search()
+    {
+        departments = await DepartmentService.GetDepartmentsByName(search);
+    }
+
+    protected async Task Add()
+    {
+        var tempId = departments!.MaxBy(d => d.id)!.id + 1;
+
+        var temp = new Department
+        {
+            id = tempId,
+            name = _department.name
+        };
+        await Http.PutAsJsonAsync("department", temp);
+        departments = await DepartmentService.GetDepartments();
+    }
+
+    protected async Task delete(int id)
+    {
+        await Http.DeleteAsync($"department/{id}");
+        departments = await DepartmentService.GetDepartments();
+    }
+
+}
