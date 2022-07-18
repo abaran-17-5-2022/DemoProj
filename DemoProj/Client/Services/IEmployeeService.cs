@@ -8,8 +8,12 @@ namespace DemoProj.Client.Services
 
         Task<List<Employee>?> GetEmployeeByName(string name);
 
+        Task<Employee?> GetEmployeeById(int id);
+
         Task AddEmployee(int id, Employee employee);
 
         Task DeleteEmployee(int id);
+
+        Task EditEmployee(int id, Employee employee);
     }
 }

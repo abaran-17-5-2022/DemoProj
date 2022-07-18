@@ -1,6 +1,7 @@
 ﻿@page "/alladdresses"
 @using DemoProj.Shared.Models
 @inject HttpClient Http
+@inject IAddressService AddressService
 
 <PageTitle>Address Details</PageTitle>
 
@@ -37,7 +38,7 @@ else
         <tr>
             <td>-</td>
             <td>
-                <input type="text" @bind="address"/>
+                <input type="text" @bind="_address!.address"/>
             </td>
             <td>
                 <button @onclick="Add">Add</button>
@@ -48,55 +49,36 @@ else
 }
 
 @code {
-    public int id { get; set; }
-    public string address { get; set; } = "";
+    private Address? _address = new();
 
-
-    private List<Address> addresses = new();
+    private List<Address>? addresses = new();
 
     public string search { get; set; } = "";
 
     protected override async Task OnInitializedAsync()
     {
-        await GetAll();
-    }
-
-    protected async Task GetAll()
-    {
-        var temp = await Http.GetFromJsonAsync<List<Address>>("address");
-        if (temp != null)
-        {
-            addresses = temp;
-        }
+        addresses = await AddressService.GetAddresses();
     }
 
     protected async Task Search()
     {
-        var temp = await Http.GetFromJsonAsync<List<Address>>($"address/{search}");
-        if (temp != null)
-        {
-            addresses = temp;
-        }
+        addresses = await AddressService.GetAddressesByName(search);
     }
 
     protected async Task Add()
     {
-        var tempId = addresses.MaxBy(a => a.id).id + 1;
+        var tempId = addresses!.MaxBy(a => a.id)!.id + 1;
 
-        var temp = new Address
-        {
-            id = tempId,
-            address = address
-        };
-        await Http.PutAsJsonAsync("address", temp);
-        await GetAll();
-        address = "";
+        _address!.id = tempId;
+        await AddressService.AddAddress(_address);
+        _address = new();
+        addresses = await AddressService.GetAddresses();
     }
 
     protected async Task delete(int id)
     {
-        await Http.DeleteAsync($"address/{id}");
-        await GetAll();
+        await AddressService.DeleteAddress(id);
+        addresses = await AddressService.GetAddresses();
     }
 
 }

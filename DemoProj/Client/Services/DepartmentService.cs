@@ -21,5 +21,27 @@ namespace DemoProj.Client.Services
         {
             return await _httpClient.GetFromJsonAsync<List<Department>?>($"department/{name}");
         }
+
+        public async Task<Department?> GetDepartmentById(int id)
+        {
+            return await _httpClient.GetFromJsonAsync<Department?>($"department/{id}");
+        }
+
+        public async Task AddDepartment(Department department)
+        {
+            if (department.name != "")
+            await _httpClient.PutAsJsonAsync("department", department);
+        }
+
+        public async Task DeleteDepartment(int id)
+        {
+            await _httpClient.DeleteAsync($"department/{id}");
+        }
+
+        public async Task EditDepartment(int id, Department department)
+        {
+            if (department.name != "")
+            await _httpClient.PutAsJsonAsync($"department/{id}", department);
+        }
     }
 }

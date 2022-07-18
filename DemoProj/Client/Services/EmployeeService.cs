@@ -26,6 +26,11 @@ namespace DemoProj.Client.Services
             await _httpClient.DeleteAsync($"employee/{id}");
         }
 
+        public async Task<Employee?> GetEmployeeById(int id)
+        {
+            return await _httpClient.GetFromJsonAsync<Employee>($"employee/{id}");
+        }
+
         public async Task<List<Employee>?> GetEmployeeByName(string name)
         {
             return await _httpClient.GetFromJsonAsync<List<Employee>>($"employee/{name}");
@@ -34,6 +39,12 @@ namespace DemoProj.Client.Services
         public async Task<List<Employee>?> GetEmployees()
         {
             return await _httpClient.GetFromJsonAsync<List<Employee>>("employee");
+        }
+
+        public async Task EditEmployee(int id, Employee employee)
+        {
+            if (employee.Fname != "" && employee.Lname != "")
+            await _httpClient.PutAsJsonAsync($"employee/{id}", employee);
         }
     }
 }

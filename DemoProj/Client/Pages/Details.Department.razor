@@ -2,6 +2,7 @@
 @using DemoProj.Shared.Models
 @inject NavigationManager NavManager
 @inject HttpClient Http
+@inject IDepartmentService DepartmentService
 
 <h3>Details of Department (Id : @id)</h3>
 
@@ -19,7 +20,7 @@
         <tr>
             <td> - </td>
             <td>
-                <input @bind="@department.name"/>
+                <input @bind="@department!.name"/>
             </td>
             <td>
                 <button @onclick="edit">done</button>
@@ -29,8 +30,8 @@
     else
     {
         <tr>
-            <td>@department.id</td>
-            <td>@department.name</td>
+            <td>@department!.id</td>
+            <td>@department!.name</td>
             <td><button @onclick="() => isEditing = !isEditing">edit</button> | <button @onclick="delete">delete</button></td>
         </tr>
     }
@@ -44,27 +45,22 @@
 
     public bool isEditing { get; set; }
 
-    public Department department = new();
+    public Department? department = new();
 
     protected override async Task OnInitializedAsync()
     {
-        var temp = await Http.GetFromJsonAsync<Department>($"department/{id}");
-        if (temp != null)
-        {
-            department = temp;
-        }
+        department = await DepartmentService.GetDepartmentById(id);
     }
 
     protected async Task delete()
     {
-        await Http.DeleteAsync($"department/{id}");
+        await DepartmentService.DeleteDepartment(id);
         NavManager.NavigateTo("department/");
     }
 
     protected async Task edit()
     {
-        await Http.PutAsJsonAsync($"department/{id}", department);
+        await DepartmentService.EditDepartment(id, department!);
         isEditing = !isEditing;
     }
-
 }

@@ -75,19 +75,15 @@ else
     {
         var tempId = departments!.MaxBy(d => d.id)!.id + 1;
 
-        var temp = new Department
-        {
-            id = tempId,
-            name = _department.name
-        };
-        await Http.PutAsJsonAsync("department", temp);
+        _department.id = tempId;
+        await DepartmentService.AddDepartment(_department);
         departments = await DepartmentService.GetDepartments();
+        _department = new();
     }
 
     protected async Task delete(int id)
     {
-        await Http.DeleteAsync($"department/{id}");
+        await DepartmentService.DeleteDepartment(id);
         departments = await DepartmentService.GetDepartments();
     }
-
 }

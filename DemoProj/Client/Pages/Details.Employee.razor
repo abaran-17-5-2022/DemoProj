@@ -23,16 +23,16 @@
         <tr>
             <td> - </td>
             <td>
-                <input @bind="employee.Fname"/>
+                <input @bind="employee!.Fname"/>
             </td>
             <td>
-                <input @bind="employee.Lname"/>
+                <input @bind="employee!.Lname"/>
             </td>
             <td>
-                <input @bind="employee.DeptId"/>
+                <input @bind="employee!.DeptId"/>
             </td>
             <td>
-                <input @bind="employee.AddressId"/>
+                <input @bind="employee!.AddressId"/>
             </td>
             <td>
                 <button @onclick="() => edit(employee)">done</button>
@@ -42,14 +42,14 @@
     else
     {
         <tr>
-            <td>@employee.Id</td>
-            <td>@employee.Fname</td>
-            <td>@employee.Lname</td>
+            <td>@id</td>
+            <td>@employee!.Fname</td>
+            <td>@employee!.Lname</td>
             <td>
-                <a href="details/department/@employee.DeptId">@employee.DeptId</a>
+                <a href="details/department/@employee!.DeptId">@employee!.DeptId</a>
             </td>
             <td>
-                <a href="details/address/@employee.AddressId">@employee.AddressId</a>
+                <a href="details/address/@employee!.AddressId">@employee!.AddressId</a>
             </td>
             <td><button @onclick="() => isEditing = !isEditing">edit</button> | <button @onclick="() => delete(employee.Id)">delete</button></td>
         </tr>
@@ -65,20 +65,16 @@
 
     public bool isEditing { get; set; }
 
-    public Employee employee = new();
+    public Employee? employee = new ();
 
     protected override async Task OnInitializedAsync()
     {
-        var temp = await Http.GetFromJsonAsync<Employee>($"employee/{id}");
-        if (temp != null)
-        {
-            employee = temp;
-        }
+        employee = await EmployeeService.GetEmployeeById(id);
     }
 
     protected async Task delete(int id)
     {
-        await Http.DeleteAsync($"employee/{id}");
+        await EmployeeService.DeleteEmployee(id);
         NavManager.NavigateTo("/allemployees");
     }
 

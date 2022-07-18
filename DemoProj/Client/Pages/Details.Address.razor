@@ -2,6 +2,7 @@
 @using DemoProj.Shared.Models
 @inject NavigationManager NavManager
 @inject HttpClient Http
+@inject IAddressService AddressService
 
 <h3>Details of Address (Id : @id)</h3>
 
@@ -52,31 +53,22 @@ else
 
     public bool isEditing { get; set; }
 
-    public Address? address;
+    public Address? address = new();
 
     protected override async Task OnInitializedAsync()
     {
-        await Get();
-    }
-
-    protected async Task Get()
-    {
-        var temp = await Http.GetFromJsonAsync<Address>($"address/{id}");
-        if (temp != null)
-        {
-            address = temp;
-        }
+        address = await AddressService.GetAddressesById(id);
     }
 
     protected async Task delete()
     {
-        await Http.DeleteAsync($"address/{id}");
+        await AddressService.DeleteAddress(id);
         NavManager.NavigateTo("address/");
     }
 
     protected async Task edit()
     {
-        await Http.PutAsJsonAsync<Address>($"address/{id}", address);
+        await AddressService.EditAddress(id, address!);
         isEditing = !isEditing;
     }
 
