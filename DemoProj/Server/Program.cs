@@ -6,6 +6,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+builder.Services.AddScoped<IAddressController, AddressController>();
+builder.Services.AddScoped<IDepartmentController, DepartmentController>();
+builder.Services.AddScoped<IEmployeeController, EmployeeController>();
 
 var app = builder.Build();
 

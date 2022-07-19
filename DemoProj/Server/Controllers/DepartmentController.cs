@@ -9,8 +9,12 @@ namespace DemoProj.Server.Controllers;
 [Route("[controller]")]
 public class DepartmentController : IDepartmentController
 {
-    private readonly string connectionString =
-        "Data Source=DESKTOP-CT6VF8I;Initial Catalog=DemoProject;Integrated Security=True;TrustServerCertificate=True";
+    private readonly string connectionString;
+
+    public DepartmentController(IConfiguration configuration)
+    {
+        connectionString = configuration.GetConnectionString("DemoProject");
+    }
 
     [HttpGet]
     public List<Department> GetAll()

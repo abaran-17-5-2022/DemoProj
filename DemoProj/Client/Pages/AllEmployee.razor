@@ -8,7 +8,8 @@
 <h1>Employee Details</h1>
 
 <input type="text" @oninput="Search" placeholder="Search"/>
-<button @onclick="() => OrderBy(orderByAsc)">Order By Id</button>
+<button @onclick="() => OrderById(orderByIdAsc)">Order By Id</button>
+<button @onclick="() => OrderByFname(orderByFnameAsc)">Order By Fname</button>
 @if (employees == null)
 {
     <p>
@@ -89,7 +90,8 @@ else
 
 @code {
     private Employee _employee = new ();
-    private bool orderByAsc = true;
+    private bool orderByIdAsc = true;
+    private bool orderByFnameAsc = true;
 
     private List<Employee>? employees;
 
@@ -119,7 +121,7 @@ else
         employees = await EmployeeService.GetEmployees();
     }
 
-    private void OrderBy(bool asc)
+    private void OrderById(bool asc)
     {
         if (!asc)
         {
@@ -128,6 +130,18 @@ else
         {
             employees = employees!.OrderBy(e => e.Id).ToList();
         }
-        orderByAsc = !orderByAsc;
+        orderByIdAsc = !orderByIdAsc;
+    }
+
+    private void OrderByFname(bool asc)
+    {
+        if (!asc)
+        {
+            employees = employees!.OrderByDescending(e => e.Fname).ToList();
+        } else
+        {
+            employees = employees!.OrderBy(e => e.Fname).ToList();
+        }
+        orderByFnameAsc = !orderByFnameAsc;
     }
 }

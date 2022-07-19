@@ -9,8 +9,12 @@ namespace DemoProj.Server.Controllers;
 [Route("[controller]")]
 public class AddressController : IAddressController
 {
-    private readonly string connectionString =
-        "Data Source=DESKTOP-CT6VF8I;Initial Catalog=DemoProject;Integrated Security=True;TrustServerCertificate=True";
+    private readonly string connectionString;
+
+    public AddressController(IConfiguration configuration)
+    {
+        connectionString = configuration.GetConnectionString("DemoProject");
+    }
 
     [HttpGet]
     public List<Address> GetAll()

@@ -9,8 +9,12 @@ namespace DemoProj.Server.Controllers;
 [Route("[controller]")]
 public class EmployeeController : IEmployeeController
 {
-    private readonly string connectionString =
-        "Data Source=DESKTOP-CT6VF8I;Initial Catalog=DemoProject;Integrated Security=True;TrustServerCertificate=True";
+    private readonly string connectionString;
+
+    public EmployeeController(IConfiguration configuration)
+    {
+        connectionString = configuration.GetConnectionString("DemoProject");
+    }
 
     [HttpGet]
     public List<Employee> GetAll()
