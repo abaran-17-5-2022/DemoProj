@@ -17,12 +17,12 @@ public class AddressController : IAddressController
     }
 
     [HttpGet]
-    public List<Address> GetAll()
+    public async Task<List<Address>> GetAll()
     {
         var sql = @"SELECT * FROM address";
         var connection = new SqlConnection(connectionString);
 
-        var temp = connection.Query<Address>(sql).ToList();
+        var temp = (await connection.QueryAsync<Address>(sql)).ToList();
         if (temp.Count > 0) return temp;
         return new List<Address>
         {
@@ -30,12 +30,12 @@ public class AddressController : IAddressController
         };
     }
 
-    [HttpGet("{name}")]
-    public List<Address> GetByName(string name)
+    [HttpGet("search/{name}")]
+    public async Task<List<Address>> GetByName(string name)
     {
         var sql = @$"SELECT * FROM address WHERE address LIKE '%{name}%'";
         var connection = new SqlConnection(connectionString);
-        var temp = connection.Query<Address>(sql).ToList();
+        var temp = (await connection.QueryAsync<Address>(sql)).ToList();
         if (temp.Count > 0) return temp;
         return new List<Address>
         {
@@ -52,26 +52,26 @@ public class AddressController : IAddressController
     }
 
     [HttpPut]
-    public void Add([FromBody] Address address)
+    public async void Add([FromBody] Address address)
     {
         var sql = @$"INSERT INTO address (Id, address) VALUES ({address.id}, '{address.address}')";
         var connection = new SqlConnection(connectionString);
-        connection.Execute(sql);
+        await connection.ExecuteAsync(sql);
     }
 
     [HttpDelete("{Id:int}")]
-    public void Delete(int id)
+    public async void Delete(int id)
     {
         var sql = @$"DELETE FROM address WHERE Id = {id}";
         var connection = new SqlConnection(connectionString);
-        connection.Execute(sql);
+        await connection.ExecuteAsync(sql);
     }
 
     [HttpPut("{Id:int}")]
-    public void Edit([FromBody] Address address, int id)
+    public async void Edit([FromBody] Address address, int id)
     {
         var sql = @$"UPDATE address SET address = '{address.address}' WHERE Id = {id}";
         var connection = new SqlConnection(connectionString);
-        connection.Execute(sql);
+        await connection.ExecuteAsync(sql);
     }
 }

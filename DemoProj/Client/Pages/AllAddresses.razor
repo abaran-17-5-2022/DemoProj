@@ -7,8 +7,7 @@
 
 <h1>Address Details</h1>
 
-<input type="text" @bind="search" placeholder="Search"/>
-<button @onclick="Search">Search</button>
+<input type="text" @oninput="Search" placeholder="Search"/>
 
 @if (addresses == null)
 {
@@ -60,9 +59,16 @@ else
         addresses = await AddressService.GetAddresses();
     }
 
-    protected async Task Search()
+    private async Task Search(ChangeEventArgs args)
     {
-        addresses = await AddressService.GetAddressesByName(search);
+        string query = args.Value == null ? "" : (string)args.Value;
+        if (query == "")
+        {
+            addresses = await AddressService.GetAddresses();
+        } else
+        {
+            addresses = await AddressService.GetAddressesByName(query);
+        }
     }
 
     protected async Task Add()

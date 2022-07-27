@@ -31,9 +31,9 @@ namespace DemoProj.Client.Services
             return await _httpClient.GetFromJsonAsync<Employee>($"employee/{id}");
         }
 
-        public async Task<List<Employee>?> GetEmployeeByName(string name)
+        public async Task<List<Employee>?> GetEmployeesByName(string name)
         {
-            return await _httpClient.GetFromJsonAsync<List<Employee>>($"employee/{name}");
+            return await _httpClient.GetFromJsonAsync<List<Employee>>($"employee/search/{name}");
         }
 
         public async Task<List<Employee>?> GetEmployees()

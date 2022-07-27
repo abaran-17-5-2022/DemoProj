@@ -7,8 +7,7 @@
 
 <h1>Department Details</h1>
 
-<input type="text" @bind="search" placeholder="Search"/>
-<button @onclick="Search">Search</button>
+<input type="text" @oninput="Search" placeholder="Search"/>
 
 @if (departments == null)
 {
@@ -66,9 +65,16 @@ else
         departments = await DepartmentService.GetDepartments();
     }
 
-    protected async Task Search()
+    private async Task Search(ChangeEventArgs args)
     {
-        departments = await DepartmentService.GetDepartmentsByName(search);
+        string query = args.Value == null ? "" : (string)args.Value;
+        if (query == "")
+        {
+            departments = await DepartmentService.GetDepartments();
+        } else
+        {
+            departments = await DepartmentService.GetDepartmentsByName(query);
+        }
     }
 
     protected async Task Add()

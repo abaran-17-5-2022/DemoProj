@@ -6,7 +6,7 @@ namespace DemoProj.Client.Services
     {
         Task<List<Employee>?> GetEmployees();
 
-        Task<List<Employee>?> GetEmployeeByName(string name);
+        Task<List<Employee>?> GetEmployeesByName(string name);
 
         Task<Employee?> GetEmployeeById(int id);
 

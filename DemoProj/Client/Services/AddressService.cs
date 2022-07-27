@@ -40,7 +40,7 @@ namespace DemoProj.Client.Services
 
         public async Task<List<Address>?> GetAddressesByName(string name)
         {
-            return await _httpClient.GetFromJsonAsync<List<Address>>($"address/{name}");
+            return await _httpClient.GetFromJsonAsync<List<Address>>($"address/search/{name}");
         }
     }
 }

@@ -2,6 +2,7 @@
 @using DemoProj.Shared.Models
 @inject HttpClient Http
 @inject IEmployeeService EmployeeService
+@inject NavigationManager NavManager
 
 <PageTitle>Employee Details</PageTitle>
 
@@ -86,6 +87,7 @@ else
         </tr>
         </tbody>
     </table>
+    
 }
 
 @code {
@@ -102,9 +104,14 @@ else
 
     private async Task Search(ChangeEventArgs args)
     {
-        var search = args.Value == null ? "" : (string)args.Value;
-
-        employees = await EmployeeService.GetEmployeeByName(search);
+        string query = args.Value == null ? "" : (string)args.Value;
+        if (query == "")
+        {
+            employees = await EmployeeService.GetEmployees();
+        } else
+        {
+            employees = await EmployeeService.GetEmployeesByName(query);
+        }
     }
 
     private async Task Add()
@@ -113,6 +120,11 @@ else
         await EmployeeService.AddEmployee(tempId, _employee);
         _employee = new();
         employees = await EmployeeService.GetEmployees();
+    }
+
+    private void Details(int Id)
+    {
+        NavManager.NavigateTo($"/details/employee/{Id}");
     }
 
     private async Task Delete(int id)

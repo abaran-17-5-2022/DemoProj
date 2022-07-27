@@ -19,7 +19,7 @@ namespace DemoProj.Client.Services
 
         public async Task<List<Department>?> GetDepartmentsByName(string name)
         {
-            return await _httpClient.GetFromJsonAsync<List<Department>?>($"department/{name}");
+            return await _httpClient.GetFromJsonAsync<List<Department>>($"department/search/{name}");
         }
 
         public async Task<Department?> GetDepartmentById(int id)
