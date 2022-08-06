@@ -3,85 +3,74 @@
 @inject NavigationManager NavManager
 @inject HttpClient Http
 @inject IEmployeeService EmployeeService
+@inject IDepartmentService DepartmentService
+@inject IAddressService AddressService
 
-<h3>Details of Employee (Id : @id)</h3>
 
-<table class="table">
-    <thead>
-    <tr>
-        <th>Id</th>
-        <th>Fname</th>
-        <th>Lname</th>
-        <th>dept_Id</th>
-        <th>address_Id</th>
-        <th>actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    @if (isEditing)
-    {
-        <tr>
-            <td> - </td>
-            <td>
-                <input @bind="employee!.Fname"/>
-            </td>
-            <td>
-                <input @bind="employee!.Lname"/>
-            </td>
-            <td>
-                <input @bind="employee!.DeptId"/>
-            </td>
-            <td>
-                <input @bind="employee!.AddressId"/>
-            </td>
-            <td>
-                <button @onclick="() => edit(employee)">done</button>
-            </td>
-        </tr>
-    }
-    else
-    {
-        <tr>
-            <td>@id</td>
-            <td>@employee!.Fname</td>
-            <td>@employee!.Lname</td>
-            <td>
-                <a href="details/department/@employee!.DeptId">@employee!.DeptId</a>
-            </td>
-            <td>
-                <a href="details/address/@employee!.AddressId">@employee!.AddressId</a>
-            </td>
-            <td><button @onclick="() => isEditing = !isEditing">edit</button> | <button @onclick="() => delete(employee.Id)">delete</button></td>
-        </tr>
-    }
-
-    </tbody>
-</table>
+<div class="page">
+    <div class="local-header">
+        <h3>Details of Employee (Id : @id)</h3>
+        <div class="actions">
+            <button @onclick="edit"><img src="edit.png" /></button>
+            <button @onclick="delete"><img src="delete-user.png" /></button>
+        </div>
+    </div>
+    <div class="profile-pic">
+        <img src="@pictureType" />
+    </div>
+    <div class="personal-details">
+        <h3>@employee!.first_name @employee!.last_name</h3>
+        @*<p>@employee!.gender</p>*@
+        <p><img src="at.svg" />@employee!.email</p>
+        <p><img src="phone.svg" />@employee!.phone_number</p>
+    </div>
+    <div class="department-details">
+        @*<h3>Department Details</h3>*@
+        <p style="font-weight: bold;">@department!.dept_name Department</p>
+        <p><img src="phone.svg" />@department!.dept_phone</p>
+        <p style="font-weight: bold;">@department!.company_name</p>
+        <p><img src="phone.svg" />@department!.company_phone</p>
+    </div>
+    <div class="address-details">
+        <p><img src="marker.svg" />@address!.street,</p>
+        <p>@address!.state,</p>
+        <p>@address!.country</p>
+    </div>
+</div>
 
 @code {
-
     [Parameter]
     public int id { get; set; }
 
-    public bool isEditing { get; set; }
+    private EmployeeDB? employee = new ();
 
-    public Employee? employee = new ();
+    private DepartmentDB? department = new();
+
+    private AddressDB? address = new();
+
+    private string pictureType = "male.svg";
 
     protected override async Task OnInitializedAsync()
     {
         employee = await EmployeeService.GetEmployeeById(id);
+        department = await DepartmentService.GetDepartmentById(employee!.dept_id);
+        address = await AddressService.GetAddressById(employee!.address_id);
+
+        if (employee.gender.Equals("Female"))
+        {
+            pictureType = "female.svg";
+        }
     }
 
-    protected async Task delete(int id)
+    protected async Task delete()
     {
-        await EmployeeService.DeleteEmployee(id);
-        NavManager.NavigateTo("/allemployees");
+        await EmployeeService.DeleteEmployee(employee!.id);
+        NavManager.NavigateTo("/allemployees", replace:true);
     }
 
-    protected async Task edit(Employee e)
+    protected void edit()
     {
-        await Http.PutAsJsonAsync($"employee/{id}", employee);
-        isEditing = !isEditing;
+        NavManager.NavigateTo(@$"/edit/employee/{employee!.id}", replace:true);
     }
 
 }

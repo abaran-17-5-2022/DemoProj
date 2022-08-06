@@ -1,0 +1,40 @@
+﻿@page "/add/employee"
+@using DemoProj.Shared.Models;
+@inject IEmployeeService EmployeeService
+@inject NavigationManager NavManager
+
+@if (employee != null)
+{
+    <div class="page">
+        <div class="main-content">
+            <p>First Name</p>
+            <input type="text" @bind="employee.first_name"/>
+            <p>Last Name</p>
+            <input type="text" @bind="employee.last_name"/>
+            <p>Gender</p>
+            <input type="text" @bind="employee.gender"/>
+            <p>Email</p>
+            <input type="text" @bind="employee.email"/>
+            <p>Phone Number</p>
+            <input type="text" @bind="employee.phone_number"/>
+            <p>Department ID</p>
+            <input type="number" @bind="employee.dept_id"/>
+            <p>Address ID</p>
+            <input type="number" @bind="employee.address_id"/>
+        </div>
+        <button @onclick="Submit"><img src="tick.png" /></button>
+    </div>
+} else
+{
+    <h1>Loading...</h1>
+}
+
+@code {
+    private EmployeeDB employee { get; set; } = new();
+
+    private async Task Submit()
+    {
+        await EmployeeService.AddEmployee(employee);
+        NavManager.NavigateTo(@$"/allemployees", replace:true);
+    }
+}

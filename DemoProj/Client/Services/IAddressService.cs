@@ -4,16 +4,16 @@ namespace DemoProj.Client.Services
 {
     public interface IAddressService
     {
-        Task<List<Address>?> GetAddresses();
+        Task<List<AddressDB>?> GetAddress();
 
-        Task<List<Address>?> GetAddressesByName(string name);
+        Task<List<AddressDB>?> GetAddressByName(string name);
 
-        Task<Address?> GetAddressesById(int id);
+        Task<AddressDB?> GetAddressById(int id);
 
-        Task AddAddress(Address address);
+        Task AddAddress(AddressDB address);
 
         Task DeleteAddress(int id);
 
-        Task EditAddress(int id, Address address);
+        Task EditAddress(int id, AddressDB address);
     }
 }

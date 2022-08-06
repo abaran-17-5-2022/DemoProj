@@ -1,0 +1,45 @@
+.page[b-9cscdc554p] {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #0B0B0B;
+    padding: 30px;
+}
+
+
+.main-content[b-9cscdc554p] {
+    display: block;
+    width: 80%;
+    margin: 30px;
+}
+
+    .main-content input[b-9cscdc554p] {
+        font-size: 20px;
+        background-color: #B9B9B9;
+        outline: none;
+        border: 2px solid white;
+        border-radius: 25px;
+        padding: 10px;
+        margin-bottom: 10px;
+        width: 100%;
+    }
+
+p[b-9cscdc554p] {
+    font-size: 20px;
+    color: #B9B9B9;
+}
+
+button[b-9cscdc554p] {
+    height: 40px;
+    width: 40px;
+    background-color: #B9B9B9;
+    border: 2px solid white;
+    border-radius: 5px;
+    align-self: auto;
+}
+
+    button img[b-9cscdc554p] {
+        height: 25px;
+        width: 25px;
+    }

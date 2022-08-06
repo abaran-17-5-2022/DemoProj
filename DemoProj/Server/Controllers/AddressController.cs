@@ -17,44 +17,44 @@ public class AddressController : IAddressController
     }
 
     [HttpGet]
-    public async Task<List<Address>> GetAll()
+    public async Task<List<AddressDB>> GetAll()
     {
-        var sql = @"SELECT * FROM address";
+        var sql = @"SELECT * FROM addressnew";
         var connection = new SqlConnection(connectionString);
 
-        var temp = (await connection.QueryAsync<Address>(sql)).ToList();
+        var temp = (await connection.QueryAsync<AddressDB>(sql)).ToList();
         if (temp.Count > 0) return temp;
-        return new List<Address>
+        return new List<AddressDB>
         {
-            new() { address = "No Data Found" }
+            new() { state = "No Data Found" }
         };
     }
 
     [HttpGet("search/{name}")]
-    public async Task<List<Address>> GetByName(string name)
+    public async Task<List<AddressDB>> GetByName(string name)
     {
-        var sql = @$"SELECT * FROM address WHERE address LIKE '%{name}%'";
+        var sql = @$"SELECT * FROM addressnew WHERE street + state + country LIKE '%{name}%'";
         var connection = new SqlConnection(connectionString);
-        var temp = (await connection.QueryAsync<Address>(sql)).ToList();
+        var temp = (await connection.QueryAsync<AddressDB>(sql)).ToList();
         if (temp.Count > 0) return temp;
-        return new List<Address>
+        return new List<AddressDB>
         {
-            new() { address = "No Data Found" }
+            new() { state = "No Data Found" }
         };
     }
 
     [HttpGet("{Id:int}")]
-    public async Task<Address> GetById(int id)
+    public async Task<AddressDB> GetById(int id)
     {
-        var sql = @$"SELECT * FROM address WHERE Id = {id}";
+        var sql = @$"SELECT * FROM addressnew WHERE Id = {id}";
         var connection = new SqlConnection(connectionString);
-        return await connection.QueryFirstOrDefaultAsync<Address>(sql);
+        return await connection.QueryFirstOrDefaultAsync<AddressDB>(sql);
     }
 
     [HttpPut]
-    public async void Add([FromBody] Address address)
+    public async void Add([FromBody] AddressDB address)
     {
-        var sql = @$"INSERT INTO address (Id, address) VALUES ({address.id}, '{address.address}')";
+        var sql = @$"INSERT INTO addressnew (street, state, country) VALUES ('{address.street}', '{address.state}', '{address.country}')";
         var connection = new SqlConnection(connectionString);
         await connection.ExecuteAsync(sql);
     }
@@ -62,15 +62,18 @@ public class AddressController : IAddressController
     [HttpDelete("{Id:int}")]
     public async void Delete(int id)
     {
-        var sql = @$"DELETE FROM address WHERE Id = {id}";
+        var sql = @$"DELETE FROM addressnew WHERE Id = {id}";
         var connection = new SqlConnection(connectionString);
         await connection.ExecuteAsync(sql);
     }
 
     [HttpPut("{Id:int}")]
-    public async void Edit([FromBody] Address address, int id)
+    public async void Edit([FromBody] AddressDB address, int id)
     {
-        var sql = @$"UPDATE address SET address = '{address.address}' WHERE Id = {id}";
+        var sql = @$"UPDATE addressnew SET 
+        street = '{address.street}',
+        state = '{address.state}',
+        country = '{address.country}' WHERE Id = {id}";
         var connection = new SqlConnection(connectionString);
         await connection.ExecuteAsync(sql);
     }

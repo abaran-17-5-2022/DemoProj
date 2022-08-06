@@ -2,65 +2,44 @@
 @using DemoProj.Shared.Models
 @inject HttpClient Http
 @inject IDepartmentService DepartmentService
+@inject NavigationManager NavManager
 
 <PageTitle>Department Details</PageTitle>
-
-<h1>Department Details</h1>
-
-<input type="text" @oninput="Search" placeholder="Search"/>
-
+<div class="page">
+<div class="local-header">
+    <h1>Departments</h1>
+    <div class="actions">
+        <input type="text" @oninput="Search" placeholder="Search"/>
+        <button @onclick="Add" class="add-button"><img src="plus.svg" /></button>
+    </div>
+</div>
 @if (departments == null)
 {
     <p>
         <em>Loading...</em>
     </p>
 }
-else
-{
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>name</th>
-            <th>actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var department in departments)
-        {
-            <tr>
-                <td>@department.id</td>
-                <td>@department.name</td>
-                <td><a href="details/department/@department.id">details</a> | <button @onclick="() => delete(department.id)">delete</button></td>
-            </tr>
-        }
-        <tr>
-            <td>-</td>
-            <td>
-                <input type="text" @bind="_department.name"/>
-            </td>
-            <td>
-                <button @onclick="Add">Add</button>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+else {
+    @foreach (var department in departments) {
+        <div class="main-content" @onclick="() => Details(department.id)">
+            <div class="content-details">
+                <img src="building.svg" />
+                <div class="details">
+                    <p class="name">@department.dept_name</p>
+                    <p class="email">@department.company_name</p>
+                </div>
+            </div>
+        </div>
+    }
 }
+</div>
 
 @code {
-    private Department _department = new ();
+    private DepartmentDB _department = new ();
 
-
-    private List<Department>? departments;
-
-    public string search { get; set; } = "";
+    private List<DepartmentDB>? departments;
 
     protected override async Task OnInitializedAsync()
-    {
-        departments = await DepartmentService.GetDepartments();
-    }
-
-    protected async Task GetAll()
     {
         departments = await DepartmentService.GetDepartments();
     }
@@ -77,19 +56,13 @@ else
         }
     }
 
-    protected async Task Add()
+    private void Add()
     {
-        var tempId = departments!.MaxBy(d => d.id)!.id + 1;
-
-        _department.id = tempId;
-        await DepartmentService.AddDepartment(_department);
-        departments = await DepartmentService.GetDepartments();
-        _department = new();
+        NavManager.NavigateTo("/add/department");
     }
 
-    protected async Task delete(int id)
+    private void Details(int Id)
     {
-        await DepartmentService.DeleteDepartment(id);
-        departments = await DepartmentService.GetDepartments();
+        NavManager.NavigateTo($"/details/department/{Id}");
     }
 }

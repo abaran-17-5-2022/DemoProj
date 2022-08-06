@@ -1,0 +1,46 @@
+﻿@inject NavigationManager NavManager
+
+
+<div class="navigation-bar">
+    <div class="logo">
+        <h3>Logo</h3>
+    </div>
+    <div @onclick="NavToEmployee" class="@EmpStyleModifier">
+        <h3>Employees</h3>
+    </div>
+    <div @onclick="NavToDepartment" class="@DepStyleModifier">
+        <h3>Departments</h3>
+    </div>
+    <div @onclick="NavToAddress" class="@AddStyleModifier">
+        <h3>Addresses</h3>
+    </div>
+</div>
+
+@code {
+    private string EmpStyleModifier = "navigation-item";
+    private string DepStyleModifier = "navigation-item";
+    private string AddStyleModifier = "navigation-item";
+    private void NavToEmployee()
+    {
+        EmpStyleModifier = "navigation-item-selected";
+        DepStyleModifier = "navigation-item";
+        AddStyleModifier = "navigation-item";
+        NavManager.NavigateTo("/allemployees");
+    }
+
+    private void NavToDepartment()
+    {
+        EmpStyleModifier = "navigation-item";
+        DepStyleModifier = "navigation-item-selected";
+        AddStyleModifier = "navigation-item";
+        NavManager.NavigateTo("/alldepartments");
+    }
+
+    private void NavToAddress()
+    {
+        EmpStyleModifier = "navigation-item";
+        DepStyleModifier = "navigation-item";
+        AddStyleModifier = "navigation-item-selected";
+        NavManager.NavigateTo("/alladdresses");
+    }
+}

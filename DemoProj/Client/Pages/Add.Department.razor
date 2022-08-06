@@ -1,0 +1,36 @@
+﻿@page "/add/department"
+@using DemoProj.Shared.Models;
+@inject IDepartmentService DepartmentService
+@inject NavigationManager NavManager
+
+@if (department != null)
+{
+    <div class="page">
+        <div class="main-content">
+            <p>Department Name</p>
+            <input type="text" @bind="department.dept_name"/>
+            <p>Department Contact</p>
+            <input type="text" @bind="department.dept_phone"/>
+            <p>Company Name</p>
+            <input type="text" @bind="department.company_name"/>
+            <p>Company Contact</p>
+            <input type="text" @bind="department.company_phone"/>
+            <p>Address Id</p>
+            <input type="number" @bind="department.address_id"/>
+        </div>
+        <button @onclick="Submit"><img src="tick.png" /></button>
+    </div>
+} else
+{
+    <h1>Loading...</h1>
+}
+
+@code {
+    private DepartmentDB department { get; set; } = new();
+
+    private async Task Submit()
+    {
+        await DepartmentService.AddDepartment(department);
+        NavManager.NavigateTo(@$"/alldepartments", replace:true);
+    }
+}

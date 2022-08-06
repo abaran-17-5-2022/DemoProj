@@ -1,18 +1,115 @@
-ul[b-95crcavg9x] {
-    padding: 0px;
-    margin: 0px;
+h1[b-95crcavg9x], p[b-95crcavg9x] {
+    color: #B9B9B9;
+    padding: 0;
+    margin: 10px;
 }
 
-li.employee[b-95crcavg9x] {
-    list-style-type: none;
-    border-radius: 15px;
+.page[b-95crcavg9x] {
+    background-color: #0B0B0B;
+    padding: 15px;
+    margin: 0;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    display: block;
+    justify-items: center;
+    width: 100%;
+}
+
+.actions[b-95crcavg9x] {
+    display: flex;
+    margin: 10px;
+    justify-content: left;
+    align-content: center;
+}
+
+    .actions input[b-95crcavg9x] {
+        border-radius: 50px;
+        border: 2px solid white;
+        outline: none;
+        padding: 10px;
+        height: 40px;
+        background-color: #B9B9B9;
+    }
+
+    .actions input:focus[b-95crcavg9x] {
+        border: 5px solid white;
+    }
+
+button[b-95crcavg9x] {
+    border-radius: 7px;
+    background-color: #B9B9B9;
+    border: 2px solid white;
+    min-width: 40px;
+    position: relative;
+    margin: 0 15px;
+}
+
+.main-content[b-95crcavg9x] {
+    background-color: #1C1C1C;
     margin: 5px;
-    padding: 25px 10px 25px 15px;
-    background-color: bisque;
-    font-size: 22px;
-    font-weight: bold;
+    padding: 10px;
+    display: flex;
+    border-radius: 10px;
+    justify-content: space-between;
+    align-content: center;
 }
 
-a.links[b-95crcavg9x] {
-    
+    .main-content:hover[b-95crcavg9x] {
+        background-color: #2D2D2D;
+    }
+
+.content-details[b-95crcavg9x] {
+    display: flex;
+/*    background-color: red;*/
+    margin: 5px;
+    padding: 5px;
+    justify-content: left;
+    align-content: center;
 }
+
+    .content-details .profile-pic[b-95crcavg9x] {
+        padding: 5px;
+        margin-right: 10px;
+        height: 60px;
+        width: 60px;
+/*        border: 3px solid white;
+        border-radius: 6px;*/
+/*        background-color: #B9B9B9;*/
+    }
+
+.details[b-95crcavg9x] {
+    display: block;
+    margin: 0;
+    padding: 0;
+
+}
+
+    .details .name[b-95crcavg9x] {
+        padding: 0;
+        margin: 0;
+        font-size: 20px;
+        color: #B9B9B9;
+        font-weight: bold;
+    }
+
+    .details .email[b-95crcavg9x] {
+        padding: 0;
+        margin: 0;
+        font-size: 16px;
+        color: #969696;
+    }
+
+    .details img[b-95crcavg9x] {
+        height: 16px;
+        width: 16px;
+    }
+
+.add-button[b-95crcavg9x] {
+    height: 40px;
+    width: 40px;
+}
+
+    .add-button img[b-95crcavg9x] {
+        padding: 2px;
+        height: 25px;
+        width: 25px;
+    }

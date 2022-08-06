@@ -1,0 +1,32 @@
+﻿@page "/add/address"
+@using DemoProj.Shared.Models;
+@inject IAddressService AddressService
+@inject NavigationManager NavManager
+
+@if (address != null)
+{
+    <div class="page">
+        <div class="main-content">
+            <p>Street</p>
+            <input type="text" @bind="address.street"/>
+            <p>State</p>
+            <input type="text" @bind="address.state"/>
+            <p>Country</p>
+            <input type="text" @bind="address.country"/>
+        </div>
+        <button @onclick="Submit"><img src="tick.png" /></button>
+    </div>
+} else
+{
+    <h1>Loading...</h1>
+}
+
+@code {
+    private AddressDB address { get; set; } = new();
+
+    private async Task Submit()
+    {
+        await AddressService.AddAddress(address);
+        NavManager.NavigateTo(@$"/alladdresses", replace:true);
+    }
+}

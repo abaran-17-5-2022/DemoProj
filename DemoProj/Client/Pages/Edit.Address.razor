@@ -1,0 +1,40 @@
+﻿@page "/edit/address/{id:int}"
+@using DemoProj.Shared.Models;
+@inject IAddressService AddressService
+@inject NavigationManager NavManager
+
+@if (address != null)
+{
+    <div class="page">
+        <div class="main-content">
+            <p>Street</p>
+            <input type="text" @bind="address.street"/>
+            <p>State</p>
+            <input type="text" @bind="address.state"/>
+            <p>Country</p>
+            <input type="text" @bind="address.country"/>
+        </div>
+        <button @onclick="Submit"><img src="tick.png" /></button>
+    </div>
+} else
+{
+    <h1>Loading...</h1>
+}
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+    private AddressDB address { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var temp = await AddressService.GetAddressById(id);
+        address = temp != null? temp : new();
+    }
+
+    private async Task Submit()
+    {
+        await AddressService.EditAddress(id, address);
+        NavManager.NavigateTo(@$"details/address/{id}", replace:true);
+    }
+}

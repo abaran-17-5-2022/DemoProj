@@ -5,10 +5,10 @@ namespace DemoProj.Server.Controllers;
 
 public interface IEmployeeController
 {
-    Task<List<Employee>> GetAll();
-    Task<List<Employee>> GetByFname(string name);
-    Task<Employee> GetById(int id);
-    void Add([FromBody] Employee employee);
+    Task<List<EmployeeDB>> GetAll();
+    Task<List<EmployeeDB>> GetByFname(string name);
+    Task<EmployeeDB> GetById(int id);
+    void Add([FromBody] EmployeeDB employee);
     void Delete(int id);
-    void Edit([FromBody] Employee employee, int id);
+    void Edit([FromBody] EmployeeDB employee, int id);
 }

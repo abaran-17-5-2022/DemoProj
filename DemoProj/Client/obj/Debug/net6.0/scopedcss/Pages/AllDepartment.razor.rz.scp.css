@@ -1,0 +1,109 @@
+h1[b-jzplc4m7up], p[b-jzplc4m7up] {
+    color: #B9B9B9;
+    padding: 0;
+    margin: 10px;
+}
+
+.page[b-jzplc4m7up] {
+    background-color: #0B0B0B;
+    padding: 15px;
+    margin: 0;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    display: block;
+    justify-items: center;
+    width: 100%;
+}
+
+.actions[b-jzplc4m7up] {
+    display: flex;
+    margin: 10px;
+    justify-content: left;
+    align-content: center;
+}
+
+    .actions input[b-jzplc4m7up] {
+        border-radius: 50px;
+        border: 2px solid white;
+        outline: none;
+        padding: 10px;
+        height: 40px;
+        background-color: #B9B9B9;
+    }
+
+        .actions input:focus[b-jzplc4m7up] {
+            border: 5px solid white;
+        }
+
+button[b-jzplc4m7up] {
+    border-radius: 7px;
+    background-color: #B9B9B9;
+    border: 2px solid white;
+    min-width: 40px;
+    position: relative;
+    margin: 0 15px;
+}
+
+.main-content[b-jzplc4m7up] {
+    background-color: #1C1C1C;
+    margin: 5px;
+    padding: 10px;
+    display: flex;
+    border-radius: 10px;
+    justify-content: space-between;
+    align-content: center;
+}
+
+    .main-content:hover[b-jzplc4m7up] {
+        background-color: #2D2D2D;
+    }
+
+.content-details[b-jzplc4m7up] {
+    display: flex;
+    /*    background-color: red;*/
+    margin: 5px;
+    padding: 5px;
+    justify-content: left;
+    align-content: center;
+}
+
+    .content-details img[b-jzplc4m7up] {
+        padding: 5px;
+        margin-right: 10px;
+        height: 60px;
+        width: 60px;
+        border: 3px solid white;
+        border-radius: 6px;
+        background-color: #B9B9B9;
+    }
+
+.details[b-jzplc4m7up] {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+    .details .name[b-jzplc4m7up] {
+        padding: 0;
+        margin: 0;
+        font-size: 20px;
+        color: #B9B9B9;
+        font-weight: bold;
+    }
+
+    .details .email[b-jzplc4m7up] {
+        padding: 0;
+        margin: 0;
+        font-size: 16px;
+        color: #969696;
+    }
+
+.add-button[b-jzplc4m7up] {
+    height: 40px;
+    width: 40px;
+}
+
+    .add-button img[b-jzplc4m7up] {
+        padding: 2px;
+        height: 25px;
+        width: 25px;
+    }

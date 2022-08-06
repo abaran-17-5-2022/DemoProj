@@ -5,10 +5,10 @@ namespace DemoProj.Server.Controllers;
 
 public interface IAddressController
 {
-    void Add([FromBody] Address address);
+    void Add([FromBody] AddressDB address);
     void Delete(int id);
-    void Edit([FromBody] Address address, int id);
-    Task<List<Address>> GetAll();
-    Task<Address> GetById(int id);
-    Task<List<Address>> GetByName(string name);
+    void Edit([FromBody] AddressDB address, int id);
+    Task<List<AddressDB>> GetAll();
+    Task<AddressDB> GetById(int id);
+    Task<List<AddressDB>> GetByName(string name);
 }

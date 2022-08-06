@@ -4,11 +4,11 @@ namespace DemoProj.Client.Services
 {
     public interface IDepartmentService
     {
-        Task<List<Department>?> GetDepartments();
-        Task<Department?> GetDepartmentById(int id);
-        Task<List<Department>?> GetDepartmentsByName(string name);
-        Task AddDepartment(Department department);
+        Task<List<DepartmentDB>?> GetDepartments();
+        Task<DepartmentDB?> GetDepartmentById(int id);
+        Task<List<DepartmentDB>?> GetDepartmentsByName(string name);
+        Task AddDepartment(DepartmentDB department);
         Task DeleteDepartment(int id);
-        Task EditDepartment(int id, Department department);
+        Task EditDepartment(int id, DepartmentDB department);
     }
 }

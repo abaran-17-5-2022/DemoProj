@@ -1,0 +1,42 @@
+﻿@page "/edit/department/{id:int}"
+@using DemoProj.Shared.Models;
+@inject IDepartmentService DepartmentService
+@inject NavigationManager NavManager
+
+@if (department != null)
+{
+    <div class="page">
+        <div class="main-content">
+            <p>Department Name</p>
+            <input type="text" @bind="department.dept_name"/>
+            <p>Department Contact</p>
+            <input type="text" @bind="department.dept_phone"/>
+            <p>Company Name</p>
+            <input type="text" @bind="department.company_name"/>
+            <p>Company Contact</p>
+            <input type="text" @bind="department.company_phone"/>
+        </div>
+        <button @onclick="Submit"><img src="tick.png" /></button>
+    </div>
+} else
+{
+    <h1>Loading...</h1>
+}
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+    private DepartmentDB department { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var temp = await DepartmentService.GetDepartmentById(id);
+        department = temp != null? temp : new();
+    }
+
+    private async Task Submit()
+    {
+        await DepartmentService.EditDepartment(id, department);
+        NavManager.NavigateTo(@$"details/department/{id}", replace:true);
+    }
+}

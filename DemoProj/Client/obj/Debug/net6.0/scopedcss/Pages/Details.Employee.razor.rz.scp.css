@@ -1,0 +1,70 @@
+p[b-gie4k6liqp] {
+    color: #B9B9B9;
+    /*    padding: 0;*/
+    /*    margin: 0;*/
+    margin-top: 10px;
+}
+
+    p img[b-gie4k6liqp] {
+        margin-right: 10px;
+        height: 20px;
+        width: 20px;
+    }
+
+h3[b-gie4k6liqp] {
+    color: #B9B9B9;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.page[b-gie4k6liqp] {
+    padding: 50px;
+    background-color: #0B0B0B;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.local-header[b-gie4k6liqp] {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    align-content: center;
+}
+
+.personal-details[b-gie4k6liqp] {
+/*    background-color: red;*/
+    padding-top: 20px;
+    font-size: 14px;
+}
+
+.profile-pic[b-gie4k6liqp] {
+    height: 200px;
+    width: 200px;
+    padding: 20px;
+    /*    background-color: #B9B9B9;*/
+    border: 5px solid #B9B9B9;
+    border-radius: 10px;
+}
+
+    .profile-pic img[b-gie4k6liqp] {
+        height: 160px;
+        width: 160px;
+    }
+
+.actions button[b-gie4k6liqp] {
+    height: 30px;
+    width: 30px;
+    margin-top: 10px;
+    background-color: #B9B9B9;
+    border: 2px solid white;
+    border-radius: 5px;
+}
+
+.actions button img[b-gie4k6liqp] {
+    height: 10px;
+    width: 10px;
+}
+
+.address-details[b-gie4k6liqp] {
+    margin-top: 20px;
+    display: flex;
+}

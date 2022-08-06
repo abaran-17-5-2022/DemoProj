@@ -11,10 +11,10 @@ namespace DemoProj.Client.Services
         {
             _httpClient = httpClient;
         }
-        public async Task AddAddress(Address address)
+        public async Task AddAddress(AddressDB address)
         {
-            if (address.address != "")
-            await _httpClient.PutAsJsonAsync<Address>("address", address);
+            if (address.street != "" && address.state != "" && address.country != "")
+            await _httpClient.PutAsJsonAsync<AddressDB>("address", address);
         }
 
         public async Task DeleteAddress(int id)
@@ -22,25 +22,25 @@ namespace DemoProj.Client.Services
             await _httpClient.DeleteAsync($"address/{id}");
         }
 
-        public async Task EditAddress(int id, Address address)
+        public async Task EditAddress(int id, AddressDB address)
         {
-            if (address.address != "")
-            await _httpClient.PutAsJsonAsync<Address>($"address/{id}", address);
+            if (address.street != "" && address.state != "" && address.country != "")
+            await _httpClient.PutAsJsonAsync<AddressDB>($"address/{id}", address);
         }
 
-        public async Task<List<Address>?> GetAddresses()
+        public async Task<List<AddressDB>?> GetAddress()
         {
-            return await _httpClient.GetFromJsonAsync<List<Address>>("address");
+            return await _httpClient.GetFromJsonAsync<List<AddressDB>>("address");
         }
 
-        public async Task<Address?> GetAddressesById(int id)
+        public async Task<AddressDB?> GetAddressById(int id)
         {
-            return await _httpClient.GetFromJsonAsync<Address>($"address/{id}");
+            return await _httpClient.GetFromJsonAsync<AddressDB>($"address/{id}");
         }
 
-        public async Task<List<Address>?> GetAddressesByName(string name)
+        public async Task<List<AddressDB>?> GetAddressByName(string name)
         {
-            return await _httpClient.GetFromJsonAsync<List<Address>>($"address/search/{name}");
+            return await _httpClient.GetFromJsonAsync<List<AddressDB>>($"address/search/{name}");
         }
     }
 }

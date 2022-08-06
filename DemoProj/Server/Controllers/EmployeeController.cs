@@ -2,6 +2,7 @@
 using DemoProj.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace DemoProj.Server.Controllers;
 
@@ -17,63 +18,61 @@ public class EmployeeController : IEmployeeController
     }
 
     [HttpGet]
-    public async Task<List<Employee>> GetAll()
+    public async Task<List<EmployeeDB>> GetAll()
     {
-        var sql = @"SELECT * FROM employee";
+        var sql = @"[dbo].[allemployees]";
         var connection = new SqlConnection(connectionString);
 
-        var temp = (await connection.QueryAsync<Employee>(sql)).ToList();
+        var temp = (await connection.QueryAsync<EmployeeDB>(sql, commandType: CommandType.StoredProcedure)).ToList();
         if (temp.Count > 0) return temp;
-        return new List<Employee>
+        return new List<EmployeeDB>
         {
-            new() { Fname = "No Data Found" }
+            new() { first_name = "No Data Found" }
         };
     }
 
     [HttpGet("search/{name}")]
-    public async Task<List<Employee>> GetByFname(string name)
+    public async Task<List<EmployeeDB>> GetByFname(string name)
     {
-        var sql = @$"SELECT * FROM employee WHERE Fname LIKE '%{name}%' or Lname LIKE '%{name}%'";
+        var sql = @$"[dbo].[employeebyname]";
         var connection = new SqlConnection(connectionString);
-        var temp = (await connection.QueryAsync<Employee>(sql)).ToList();
+        var temp = (await connection.QueryAsync<EmployeeDB>(sql, new { name = name}, commandType: CommandType.StoredProcedure)).ToList();
         if (temp.Count > 0) return temp;
-        return new List<Employee>
+        return new List<EmployeeDB>
         {
-            new() { Fname = "No Data Found" }
+            new() { first_name = "No Data Found" }
         };
     }
 
     [HttpGet("{Id:int}")]
-    public async Task<Employee> GetById(int id)
+    public async Task<EmployeeDB> GetById(int id)
     {
-        var sql = @$"SELECT * FROM employee WHERE Id = {id}";
+        var sql = @$"[dbo].[employeebyid]";
         var connection = new SqlConnection(connectionString);
-        return await connection.QueryFirstOrDefaultAsync<Employee>(sql);
+        return await connection.QueryFirstOrDefaultAsync<EmployeeDB>(sql, new { id = id }, commandType: CommandType.StoredProcedure);
     }
 
     [HttpPut]
-    public async void Add([FromBody] Employee employee)
+    public async void Add([FromBody] EmployeeDB employee)
     {
-        var sql =
-            @$"INSERT INTO employee (Id, Fname, Lname, DeptId, AddressId) VALUES ({employee.Id}, '{employee.Fname}', '{employee.Lname}', {employee.DeptId}, {employee.AddressId})";
+        var sql = $@"[dbo].[addemployee]";
         var connection = new SqlConnection(connectionString);
-        await connection.ExecuteAsync(sql);
+        await connection.ExecuteAsync(sql, employee, commandType: CommandType.StoredProcedure);
     }
 
     [HttpDelete("{Id:int}")]
     public async void Delete(int id)
     {
-        var sql = @$"DELETE FROM employee WHERE Id = {id}";
+        var sql = @$"[dbo].[deleteemployee]";
         var connection = new SqlConnection(connectionString);
-        await connection.ExecuteAsync(sql);
+        await connection.ExecuteAsync(sql, new { id = id }, commandType: CommandType.StoredProcedure);
     }
 
     [HttpPut("{Id:int}")]
-    public async void Edit([FromBody] Employee employee, int id)
+    public async void Edit([FromBody] EmployeeDB employee, int id)
     {
-        var sql =
-            @$"UPDATE employee SET Fname = '{employee.Fname}', Lname = '{employee.Lname}', DeptId = {employee.DeptId}, AddressId = {employee.AddressId} WHERE Id = {id}";
+        var sql = @$"[dbo].[editemployee]";
         var connection = new SqlConnection(connectionString);
-        await connection.ExecuteAsync(sql);
+        await connection.ExecuteAsync(sql, employee, commandType: CommandType.StoredProcedure);
     }
 }

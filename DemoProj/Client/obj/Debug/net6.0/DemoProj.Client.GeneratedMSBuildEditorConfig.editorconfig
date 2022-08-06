@@ -22,26 +22,6 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/abhna/source/repos/DemoProj/DemoProj/Client/Pages/AllAddresses.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWxsQWRkcmVzc2VzLnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/abhna/source/repos/DemoProj/DemoProj/Client/Pages/AllDepartment.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWxsRGVwYXJ0bWVudC5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/abhna/source/repos/DemoProj/DemoProj/Client/Pages/Details.Address.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGV0YWlscy5BZGRyZXNzLnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/abhna/source/repos/DemoProj/DemoProj/Client/Pages/Details.Department.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGV0YWlscy5EZXBhcnRtZW50LnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/abhna/source/repos/DemoProj/DemoProj/Client/Pages/Details.Employee.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGV0YWlscy5FbXBsb3llZS5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/abhna/source/repos/DemoProj/DemoProj/Client/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
@@ -54,9 +34,53 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/abhna/source/repos/DemoProj/DemoProj/Client/Pages/Add.Address.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkLkFkZHJlc3MucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-n8drhan3o5
+
+[C:/Users/abhna/source/repos/DemoProj/DemoProj/Client/Pages/Add.Department.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkLkRlcGFydG1lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-2fgxbq89e5
+
+[C:/Users/abhna/source/repos/DemoProj/DemoProj/Client/Pages/Add.Employee.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkLkVtcGxveWVlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-x2ainmwl1q
+
+[C:/Users/abhna/source/repos/DemoProj/DemoProj/Client/Pages/AllAddresses.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWxsQWRkcmVzc2VzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-7tbgqaqlp8
+
+[C:/Users/abhna/source/repos/DemoProj/DemoProj/Client/Pages/AllDepartment.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWxsRGVwYXJ0bWVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-jzplc4m7up
+
 [C:/Users/abhna/source/repos/DemoProj/DemoProj/Client/Pages/AllEmployee.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWxsRW1wbG95ZWUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-95crcavg9x
+
+[C:/Users/abhna/source/repos/DemoProj/DemoProj/Client/Pages/Details.Address.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGV0YWlscy5BZGRyZXNzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-7ntxghcyay
+
+[C:/Users/abhna/source/repos/DemoProj/DemoProj/Client/Pages/Details.Department.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGV0YWlscy5EZXBhcnRtZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-2q7fc37sw5
+
+[C:/Users/abhna/source/repos/DemoProj/DemoProj/Client/Pages/Details.Employee.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGV0YWlscy5FbXBsb3llZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-gie4k6liqp
+
+[C:/Users/abhna/source/repos/DemoProj/DemoProj/Client/Pages/Edit.Address.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRWRpdC5BZGRyZXNzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-62lekw0hc3
+
+[C:/Users/abhna/source/repos/DemoProj/DemoProj/Client/Pages/Edit.Department.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRWRpdC5EZXBhcnRtZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-bti119z0kb
+
+[C:/Users/abhna/source/repos/DemoProj/DemoProj/Client/Pages/Edit.Employee.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRWRpdC5FbXBsb3llZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-9cscdc554p
 
 [C:/Users/abhna/source/repos/DemoProj/DemoProj/Client/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
@@ -65,3 +89,7 @@ build_metadata.AdditionalFiles.CssScope = b-cfg72hfj2e
 [C:/Users/abhna/source/repos/DemoProj/DemoProj/Client/Shared/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-u2tld2rgy6
+
+[C:/Users/abhna/source/repos/DemoProj/DemoProj/Client/Shared/NewNavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5ld05hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-h74ecn5xpv

@@ -4,16 +4,16 @@ namespace DemoProj.Client.Services
 {
     public interface IEmployeeService
     {
-        Task<List<Employee>?> GetEmployees();
+        Task<List<EmployeeDB>?> GetEmployees();
 
-        Task<List<Employee>?> GetEmployeesByName(string name);
+        Task<List<EmployeeDB>?> GetEmployeesByName(string name);
 
-        Task<Employee?> GetEmployeeById(int id);
+        Task<EmployeeDB?> GetEmployeeById(int id);
 
-        Task AddEmployee(int id, Employee employee);
+        Task AddEmployee(EmployeeDB employee);
 
         Task DeleteEmployee(int id);
 
-        Task EditEmployee(int id, Employee employee);
+        Task EditEmployee(int id, EmployeeDB employee);
     }
 }

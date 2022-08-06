@@ -2,61 +2,47 @@
 @using DemoProj.Shared.Models
 @inject HttpClient Http
 @inject IAddressService AddressService
+@inject NavigationManager NavManager
 
 <PageTitle>Address Details</PageTitle>
-
-<h1>Address Details</h1>
-
-<input type="text" @oninput="Search" placeholder="Search"/>
-
+<div class="page">
+<div class="local-header">
+    <h1>Addresss</h1>
+    <div class="actions">
+        <input type="text" @oninput="Search" placeholder="Search"/>
+        <button @onclick="Add" class="add-button"><img src="plus.svg" /></button>
+    </div>
+</div>
 @if (addresses == null)
 {
     <p>
         <em>Loading...</em>
     </p>
 }
-else
-{
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Address</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var add in addresses)
-        {
-            <tr>
-                <td>@add.id</td>
-                <td>@add.address</td>
-                <td><a href="details/address/@add.id">details</a> | <button @onclick="() => delete(add.id)">delete</button></td>
-            </tr>
-        }
-        <tr>
-            <td>-</td>
-            <td>
-                <input type="text" @bind="_address!.address"/>
-            </td>
-            <td>
-                <button @onclick="Add">Add</button>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+else {
+    @foreach (var address in addresses) {
+        <div class="main-content" @onclick="() => Details(address.id)">
+            <div class="content-details">
+                <img src="marker.svg" />
+                <div class="details">
+                    <p class="email">@address.street</p>
+                    <p class="email">@address.state</p>
+                    <p class="email">@address.country</p>
+                </div>
+            </div>
+        </div>
+    }
 }
+</div>
 
 @code {
-    private Address? _address = new();
+    private AddressDB _address = new ();
 
-    private List<Address>? addresses = new();
-
-    public string search { get; set; } = "";
+    private List<AddressDB>? addresses;
 
     protected override async Task OnInitializedAsync()
     {
-        addresses = await AddressService.GetAddresses();
+        addresses = await AddressService.GetAddress();
     }
 
     private async Task Search(ChangeEventArgs args)
@@ -64,27 +50,20 @@ else
         string query = args.Value == null ? "" : (string)args.Value;
         if (query == "")
         {
-            addresses = await AddressService.GetAddresses();
+            addresses = await AddressService.GetAddress();
         } else
         {
-            addresses = await AddressService.GetAddressesByName(query);
+            addresses = await AddressService.GetAddressByName(query);
         }
     }
 
-    protected async Task Add()
+    private void Add()
     {
-        var tempId = addresses!.MaxBy(a => a.id)!.id + 1;
-
-        _address!.id = tempId;
-        await AddressService.AddAddress(_address);
-        _address = new();
-        addresses = await AddressService.GetAddresses();
+        NavManager.NavigateTo("/add/address");
     }
 
-    protected async Task delete(int id)
+    private void Details(int Id)
     {
-        await AddressService.DeleteAddress(id);
-        addresses = await AddressService.GetAddresses();
+        NavManager.NavigateTo($"/details/address/{Id}");
     }
-
 }

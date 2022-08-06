@@ -822,3 +822,15 @@ C:\Users\abhna\source\repos\DemoProj\DemoProj\Client\obj\Debug\net6.0\refint\Dem
 C:\Users\abhna\source\repos\DemoProj\DemoProj\Client\obj\Debug\net6.0\DemoProj.Client.pdb
 C:\Users\abhna\source\repos\DemoProj\DemoProj\Client\obj\Debug\net6.0\ref\DemoProj.Client.dll
 C:\Users\abhna\source\repos\DemoProj\DemoProj\Client\obj\Debug\net6.0\scopedcss\Pages\AllEmployee.razor.rz.scp.css
+C:\Users\abhna\source\repos\DemoProj\DemoProj\Client\obj\Debug\net6.0\scopedcss\Pages\Details.Employee.razor.rz.scp.css
+C:\Users\abhna\source\repos\DemoProj\DemoProj\Client\obj\Debug\net6.0\scopedcss\Pages\Edit.Employee.razor.rz.scp.css
+C:\Users\abhna\source\repos\DemoProj\DemoProj\Client\obj\Debug\net6.0\scopedcss\Pages\AllAddresses.razor.rz.scp.css
+C:\Users\abhna\source\repos\DemoProj\DemoProj\Client\obj\Debug\net6.0\scopedcss\Pages\AllDepartment.razor.rz.scp.css
+C:\Users\abhna\source\repos\DemoProj\DemoProj\Client\obj\Debug\net6.0\scopedcss\Pages\Details.Address.razor.rz.scp.css
+C:\Users\abhna\source\repos\DemoProj\DemoProj\Client\obj\Debug\net6.0\scopedcss\Pages\Details.Department.razor.rz.scp.css
+C:\Users\abhna\source\repos\DemoProj\DemoProj\Client\obj\Debug\net6.0\scopedcss\Pages\Edit.Address.razor.rz.scp.css
+C:\Users\abhna\source\repos\DemoProj\DemoProj\Client\obj\Debug\net6.0\scopedcss\Pages\Edit.Department.razor.rz.scp.css
+C:\Users\abhna\source\repos\DemoProj\DemoProj\Client\obj\Debug\net6.0\scopedcss\Pages\Add.Employee.razor.rz.scp.css
+C:\Users\abhna\source\repos\DemoProj\DemoProj\Client\obj\Debug\net6.0\scopedcss\Pages\Add.Address.razor.rz.scp.css
+C:\Users\abhna\source\repos\DemoProj\DemoProj\Client\obj\Debug\net6.0\scopedcss\Pages\Add.Department.razor.rz.scp.css
+C:\Users\abhna\source\repos\DemoProj\DemoProj\Client\obj\Debug\net6.0\scopedcss\Shared\NewNavMenu.razor.rz.scp.css

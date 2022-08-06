@@ -5,97 +5,49 @@
 @inject NavigationManager NavManager
 
 <PageTitle>Employee Details</PageTitle>
-
-<h1>Employee Details</h1>
-
-<input type="text" @oninput="Search" placeholder="Search"/>
-<button @onclick="() => OrderById(orderByIdAsc)">Order By Id</button>
-<button @onclick="() => OrderByFname(orderByFnameAsc)">Order By Fname</button>
+<div class="page">
+<div class="local-header">
+    <h1>Employees</h1>
+    <div class="actions">
+        <input type="text" @oninput="Search" placeholder="Search"/>
+        <button @onclick="Add" class="add-button"><img src="plus.svg" /></button>
+        <p>Order By:</p>
+        <button @onclick="() => OrderById(orderByIdAsc)">Id</button>
+        <button @onclick="() => OrderByFname(orderByFnameAsc)">Name</button>
+    </div>
+</div>
 @if (employees == null)
 {
     <p>
         <em>Loading...</em>
     </p>
 }
-else
-{
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Fname</th>
-            <th>Lname</th>
-            <th>dept_Id</th>
-            <th>address_Id</th>
-            <th>actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var employee in employees)
-        {
-            <tr>
-                <td>@employee.Id</td>
-                <td>@employee.Fname</td>
-                <td>@employee.Lname</td>
-                @if (employee.Id != 0)
-                {
-                    <td>
-                        <a href="details/department/@employee.DeptId">@employee.DeptId</a>
-                    </td>
-                }
-                else
-                {
-                    <td> - </td>
-                }
-                @if (employee.Id != 0)
-                {
-                    <td>
-                        <a href="details/address/@employee.AddressId">@employee.AddressId</a>
-                    </td>
-                }
-                else
-                {
-                    <td> - </td>
-                }
-                @if (employee.Id != 0)
-                {
-                    <td><a href="details/employee/@employee.Id">Details</a> | <button @onclick="() => Delete(employee.Id)">Delete</button></td>
-                }
-                else
-                {
-                    <td> - </td>
-                }
-            </tr>
-        }
-        <tr>
-            <td> - </td>
-            <td>
-                <input type="text" @bind="_employee.Fname"/>
-            </td>
-            <td>
-                <input type="text" @bind="_employee.Lname"/>
-            </td>
-            <td>
-                <input type="number" @bind="_employee.DeptId"/>
-            </td>
-            <td>
-                <input type="number" @bind="_employee.AddressId"/>
-            </td>
-            <td>
-                <button @onclick="Add">Add</button>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    
+else {
+    @foreach (var employee in employees) {
+            string pictureType = "male.svg";
+            if (employee.gender.Equals("Female"))
+            {
+                pictureType = "female.svg";
+            }
+            <div class="main-content" @onclick="() => Details(employee.id)">
+            <div class="content-details">
+                <img class="profile-pic" src="@pictureType" />
+                <div class="details">
+                    <p class="name">@employee.first_name @employee.last_name</p>
+                    <p class="email"><img src="at.svg" />  @employee.email</p>
+                </div>
+            </div>
+        </div>
+    }
 }
+</div>
 
 @code {
-    private Employee _employee = new ();
+    private EmployeeDB _employee = new ();
     private bool orderByIdAsc = true;
     private bool orderByFnameAsc = true;
 
-    private List<Employee>? employees;
+    private List<EmployeeDB>? employees;
 
     protected override async Task OnInitializedAsync()
     {
@@ -108,18 +60,14 @@ else
         if (query == "")
         {
             employees = await EmployeeService.GetEmployees();
-        } else
-        {
+        } else {
             employees = await EmployeeService.GetEmployeesByName(query);
         }
     }
 
-    private async Task Add()
+    private void Add()
     {
-        var tempId = employees!.MaxBy(e => e.Id)!.Id + 1;
-        await EmployeeService.AddEmployee(tempId, _employee);
-        _employee = new();
-        employees = await EmployeeService.GetEmployees();
+        NavManager.NavigateTo("/add/employee");
     }
 
     private void Details(int Id)
@@ -127,20 +75,14 @@ else
         NavManager.NavigateTo($"/details/employee/{Id}");
     }
 
-    private async Task Delete(int id)
-    {
-        await EmployeeService.DeleteEmployee(id);
-        employees = await EmployeeService.GetEmployees();
-    }
-
     private void OrderById(bool asc)
     {
         if (!asc)
         {
-            employees = employees!.OrderByDescending(e => e.Id).ToList();
+            employees = employees!.OrderByDescending(e => e.id).ToList();
         } else
         {
-            employees = employees!.OrderBy(e => e.Id).ToList();
+            employees = employees!.OrderBy(e => e.id).ToList();
         }
         orderByIdAsc = !orderByIdAsc;
     }
@@ -149,10 +91,10 @@ else
     {
         if (!asc)
         {
-            employees = employees!.OrderByDescending(e => e.Fname).ToList();
+            employees = employees!.OrderByDescending(e => e.first_name + e.last_name).ToList();
         } else
         {
-            employees = employees!.OrderBy(e => e.Fname).ToList();
+            employees = employees!.OrderBy(e => e.first_name + e.last_name).ToList();
         }
         orderByFnameAsc = !orderByFnameAsc;
     }
