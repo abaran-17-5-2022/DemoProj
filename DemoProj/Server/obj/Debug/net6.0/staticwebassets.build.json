@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "L1km5KfMCwAYq2j/HFgCMpmsC6JmvqBnAZeQiiK20Qs=",
+  "Hash": "71TTbH1jeq+WT3faNruCbQXkpY3r+H3lLNwmEpD5GqQ=",
   "Source": "DemoProj.Server",
   "BasePath": "_content/DemoProj.Server",
   "Mode": "Default",
@@ -11,10 +11,10 @@
       "Version": 2,
       "Source": "DemoProj.Client",
       "GetPublishAssetsTargets": "ComputeFilesToPublish;GetCurrentProjectPublishStaticWebAssetItems",
-      "AdditionalPublishProperties": "BuildProjectReferences=false;ResolveAssemblyReferencesFindRelatedSatellites=true;_PublishingBlazorWasmProject=true;Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishProperties": "BuildProjectReferences=false;ResolveAssemblyReferencesFindRelatedSatellites=true;_PublishingBlazorWasmProject=true",
       "AdditionalPublishPropertiesToRemove": "NoBuild;RuntimeIdentifier;WebPublishProfileFile;TargetFramework",
       "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
-      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildProperties": "",
       "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
     }
   ],
@@ -182,23 +182,6 @@
       "OriginalItemSpec": "C:\\Users\\abhna\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\6.0.7\\runtimes\\browser-wasm\\native\\dotnet.wasm"
     },
     {
-      "Identity": "C:\\Users\\abhna\\source\\repos\\DemoProj\\DemoProj\\Client\\bin\\Debug\\net6.0\\wwwroot\\_framework\\icudt.dat",
-      "SourceId": "DemoProj.Client",
-      "SourceType": "Project",
-      "ContentRoot": "C:\\Users\\abhna\\source\\repos\\DemoProj\\DemoProj\\Client\\bin\\Debug\\net6.0\\wwwroot\\",
-      "BasePath": "/",
-      "RelativePath": "_framework/icudt.dat",
-      "AssetKind": "Build",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "BlazorWebAssemblyResource",
-      "AssetTraitValue": "native",
-      "CopyToOutputDirectory": "PreserveNewest",
-      "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "C:\\Users\\abhna\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\6.0.7\\runtimes\\browser-wasm\\native\\icudt.dat"
-    },
-    {
       "Identity": "C:\\Users\\abhna\\source\\repos\\DemoProj\\DemoProj\\Client\\bin\\Debug\\net6.0\\wwwroot\\_framework\\icudt_CJK.dat",
       "SourceId": "DemoProj.Client",
       "SourceType": "Project",
@@ -248,6 +231,23 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\abhna\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\6.0.7\\runtimes\\browser-wasm\\native\\icudt_no_CJK.dat"
+    },
+    {
+      "Identity": "C:\\Users\\abhna\\source\\repos\\DemoProj\\DemoProj\\Client\\bin\\Debug\\net6.0\\wwwroot\\_framework\\icudt.dat",
+      "SourceId": "DemoProj.Client",
+      "SourceType": "Project",
+      "ContentRoot": "C:\\Users\\abhna\\source\\repos\\DemoProj\\DemoProj\\Client\\bin\\Debug\\net6.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/icudt.dat",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "BlazorWebAssemblyResource",
+      "AssetTraitValue": "native",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\abhna\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\6.0.7\\runtimes\\browser-wasm\\native\\icudt.dat"
     },
     {
       "Identity": "C:\\Users\\abhna\\source\\repos\\DemoProj\\DemoProj\\Client\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Microsoft.AspNetCore.Authorization.dll",
@@ -6999,6 +6999,23 @@
       "OriginalItemSpec": "wwwroot\\css\\bootstrap\\bootstrap.min.css.map"
     },
     {
+      "Identity": "C:\\Users\\abhna\\source\\repos\\DemoProj\\DemoProj\\Client\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
+      "SourceId": "DemoProj.Client",
+      "SourceType": "Project",
+      "ContentRoot": "C:\\Users\\abhna\\source\\repos\\DemoProj\\DemoProj\\Client\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "css/open-iconic/FONT-LICENSE",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\open-iconic\\FONT-LICENSE"
+    },
+    {
       "Identity": "C:\\Users\\abhna\\source\\repos\\DemoProj\\DemoProj\\Client\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
       "SourceId": "DemoProj.Client",
       "SourceType": "Project",
@@ -7099,23 +7116,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff"
-    },
-    {
-      "Identity": "C:\\Users\\abhna\\source\\repos\\DemoProj\\DemoProj\\Client\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
-      "SourceId": "DemoProj.Client",
-      "SourceType": "Project",
-      "ContentRoot": "C:\\Users\\abhna\\source\\repos\\DemoProj\\DemoProj\\Client\\wwwroot\\",
-      "BasePath": "/",
-      "RelativePath": "css/open-iconic/FONT-LICENSE",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\open-iconic\\FONT-LICENSE"
     },
     {
       "Identity": "C:\\Users\\abhna\\source\\repos\\DemoProj\\DemoProj\\Client\\wwwroot\\css\\open-iconic\\ICON-LICENSE",
@@ -7286,6 +7286,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\marker.svg"
+    },
+    {
+      "Identity": "C:\\Users\\abhna\\source\\repos\\DemoProj\\DemoProj\\Client\\wwwroot\\phone.svg",
+      "SourceId": "DemoProj.Client",
+      "SourceType": "Project",
+      "ContentRoot": "C:\\Users\\abhna\\source\\repos\\DemoProj\\DemoProj\\Client\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "phone.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\phone.svg"
     },
     {
       "Identity": "C:\\Users\\abhna\\source\\repos\\DemoProj\\DemoProj\\Client\\wwwroot\\plus.svg",
